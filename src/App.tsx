@@ -1,6 +1,7 @@
-import './App.css'
+import "@mantine/core/styles.css";
 
-import { Header } from './components/header/Header'
+import { Header } from './components/header/Header' 
+import { VacanciesPage } from './pages/vacanciesPage/VacanciesPage'
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header />  
+      <VacanciesPage />
     </>
   )
 }

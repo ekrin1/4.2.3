@@ -1,4 +1,4 @@
-import { Group, Image, Container } from "@mantine/core";
+import { Group, Image } from "@mantine/core";
 import clsx from "clsx";
 import styles from './Header.module.css';
 
@@ -10,7 +10,7 @@ export const Header = () => {
 
     return (
 
-        <Container className={styles.header_container}>
+        <div className={styles.header_container}>
             <header className={styles.header}>
 
                 <Group className={styles.logo}>
@@ -35,7 +35,7 @@ export const Header = () => {
                 </Group>
 
             </header>
-        </Container>
+        </div>
     )
 
 }
