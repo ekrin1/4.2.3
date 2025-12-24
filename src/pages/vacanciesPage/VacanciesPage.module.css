@@ -12,3 +12,10 @@ body .container {
   justify-content: space-between;
   padding-top: 24px; 
 }
+
+.vacancies {
+  display: flex;
+  flex-direction: column; /* ВАЖНО */
+  gap: 16px;
+}
+

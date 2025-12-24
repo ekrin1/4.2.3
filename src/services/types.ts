@@ -10,8 +10,8 @@ export interface JobType {
     employer: {name: string}; 
     salary: {from: number; to: number; currency: string} | null;
     experience: {name: string};
-    workFormat: WorkFormat[];
-    alternativeUrl: string;
+    work_format: WorkFormat[];
+    alternate_url: string;
 }
 
 export interface JobsResponse {

@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Group, Title, TextInput, Button } from "@mantine/core";
 import styles from './Search.module.css';
 ;
 import SearchIcon from '../../assets/search.svg?react';
 
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fetchVacanciesThunk, setPage, setSearch } from "../../store/vacanciesSlice";
 
-type SearchProps = {
-  onSearch: (value: string) => void;
-};
+export const Search = () => { 
 
-export const Search = ({ onSearch }: SearchProps) => { 
+    const dispatch = useAppDispatch();
+    const { page, search } = useAppSelector(
+        (state) => state.vacancies
+    );
 
-    const [value, setValue] = useState('');
+    const [localSearch, setLocalSearch] = useState(search);
+
+    useEffect(() => {
+    dispatch(fetchVacanciesThunk());
+    }, [page, dispatch]);
+
+    const handleSearch = () => {
+    dispatch(setSearch(localSearch));
+    dispatch(setPage(1));
+    dispatch(fetchVacanciesThunk());
+    };
 
     return (
 
@@ -32,14 +45,14 @@ export const Search = ({ onSearch }: SearchProps) => {
                     <TextInput
                         className={styles.search_input}
                         placeholder="Должность или название компании"
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
+                        value={localSearch}
+                        onChange={(e) => setLocalSearch(e.target.value)}
                         leftSection={<SearchIcon/>}
                         size="md"
                     />
                     <Button
                         className={styles.search_button}
-                        onClick={() => onSearch(value)}
+                        onClick={handleSearch}
                         color="primary.4"
                         size="md"
                     >
@@ -52,6 +65,4 @@ export const Search = ({ onSearch }: SearchProps) => {
         </div>
 
     )
-
-
 }

@@ -4,20 +4,40 @@ import { IconPlus } from "@tabler/icons-react";
 
 import styles from "./skillsFilter.module.css";
 
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setSkills, fetchVacanciesThunk, setPage } from "../../store/vacanciesSlice";
+
 export const SkillsFilter = () => { 
      
     const [input, setInput] = useState("");
 
-    // const addSkill = () => {}
+    const dispatch = useAppDispatch();
+    const skills = useAppSelector((state) => state.vacancies.skills);
 
-    // const removeSkill = (skill: string) => {}
+  const addSkill = () => {
+    const trimmed = input.trim();
+    if (trimmed && !skills.includes(trimmed)) {
+      const updated = [...skills, trimmed];
+      dispatch(setSkills(updated));
+      dispatch(setPage(1));
+      dispatch(fetchVacanciesThunk());
+    }
+    setInput("");
+  };
 
-    // const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (e.key === 'Enter') {
-    //         e.preventDefault();
-    //         addSkill();
-    //     }
-    // }
+    const removeSkill = (skill: string) => {
+    const updated = skills.filter((s) => s !== skill);
+    dispatch(setSkills(updated));
+    dispatch(setPage(1));
+    dispatch(fetchVacanciesThunk());
+  };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+        e.preventDefault();
+        addSkill();
+        }
+    };
 
     return ( 
 
@@ -31,11 +51,11 @@ export const SkillsFilter = () => {
                     placeholder="Навык"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    // onKeyDown={handleKeyDown}
+                    onKeyDown={handleKeyDown}
                     className={styles.form_input}   
                 />
                 <ActionIcon
-                    // onClick={//addSkill}
+                    onClick={addSkill}
                     className={styles.form_button}
                     color="#228BE6"
                 >
@@ -45,15 +65,15 @@ export const SkillsFilter = () => {
 
             <Group className={styles.pills}>
                 <PillGroup>
-                    {/* {skills.map((skill) => ( */}
+                    {skills.map((skill) => (
                         <Pill 
-                        // key={skill} 
-                        // onRemove={() => removeSkill(skill)}
+                        key={skill} 
+                        onRemove={() => removeSkill(skill)}
                         className={styles.pills_skill}
                         >
-                            {/* {skill} */}
+                            {skill}
                         </Pill>
-                    {/* ))} */}
+                    ))} 
                 </PillGroup>
             </Group>
 
