@@ -10,9 +10,9 @@ export const CitiesFilter = () => {
     const dispatch = useAppDispatch();
 
     const handleCityChange = (value: string | null) => {
-    dispatch(setCity(value || "Все"));
-    dispatch(setPage(1));
-    dispatch(fetchVacanciesThunk());
+        dispatch(setCity(value || "Все"));
+        dispatch(setPage(1));
+        dispatch(fetchVacanciesThunk());
     };
 
     return (
@@ -25,5 +25,4 @@ export const CitiesFilter = () => {
                 leftSection={ <img src={location} alt="location" /> }
             />
         )
-
 }

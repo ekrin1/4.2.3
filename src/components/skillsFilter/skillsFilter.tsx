@@ -14,23 +14,23 @@ export const SkillsFilter = () => {
     const dispatch = useAppDispatch();
     const skills = useAppSelector((state) => state.vacancies.skills);
 
-  const addSkill = () => {
-    const trimmed = input.trim();
-    if (trimmed && !skills.includes(trimmed)) {
-      const updated = [...skills, trimmed];
-      dispatch(setSkills(updated));
-      dispatch(setPage(1));
-      dispatch(fetchVacanciesThunk());
-    }
-    setInput("");
-  };
+    const addSkill = () => {
+        const trimmed = input.trim();
+        if (trimmed && !skills.includes(trimmed)) {
+        const updated = [...skills, trimmed];
+        dispatch(setSkills(updated));
+        dispatch(setPage(1));
+        dispatch(fetchVacanciesThunk());
+        }
+        setInput("");
+    };
 
     const removeSkill = (skill: string) => {
     const updated = skills.filter((s) => s !== skill);
-    dispatch(setSkills(updated));
-    dispatch(setPage(1));
-    dispatch(fetchVacanciesThunk());
-  };
+        dispatch(setSkills(updated));
+        dispatch(setPage(1));
+        dispatch(fetchVacanciesThunk());
+    };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {

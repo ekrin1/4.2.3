@@ -1,5 +1,5 @@
 export interface WorkFormat {
-    id: 'remote' | 'onsite' | 'hybrid';
+    id: 'REMOTE' | 'ON_SITE' | 'HYBRID';
     name: string;
 }
 

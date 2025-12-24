@@ -14,14 +14,14 @@ export interface VacanciesState {
 }
 
 const initialState: VacanciesState = {
-  items: [],
-  loading: false,
-  error: null,
-  page: 1,
-  totalPages: 1,
-  skills: ["JavaScript", "React", "Redux", "ReduxToolkit", "Nextjs"],
-  search: "",
-  city: "",
+    items: [],
+    loading: false,
+    error: null,
+    page: 1,
+    totalPages: 1,
+    skills: ["JavaScript", "React", "Redux", "ReduxToolkit", "Nextjs"],
+    search: "",
+    city: "",
 }
 
 export const fetchVacanciesThunk = createAsyncThunk(
@@ -51,6 +51,7 @@ const vacanciesSlice = createSlice({
       state.skills = action.payload;
     },
     },
+    
     extraReducers: (builder) => {
         builder
         .addCase(fetchVacanciesThunk.pending, (state) => {

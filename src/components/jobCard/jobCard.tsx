@@ -11,25 +11,25 @@ type Props = {
 export const JobCard = ({ vacancy }: Props) => {
 
     const formatNumber = (num?: number) => {
-    if (!num) return "";
-    return new Intl.NumberFormat("ru-RU").format(num);
-  };
+      if (!num) return "";
+      return new Intl.NumberFormat("ru-RU").format(num);
+    };
 
-  const formatCurrency = (currencyName?: string) => {
-    if (currencyName?.includes("RUR")) return "₽";
-    if (currencyName?.includes("KZT")) return "₸";
-    if (currencyName?.includes("USD")) return "$";
-    return currencyName;
-  };
+    const formatCurrency = (currencyName?: string) => {
+      if (currencyName?.includes("RUR")) return "₽";
+      if (currencyName?.includes("KZT")) return "₸";
+      if (currencyName?.includes("USD")) return "$";
+      return currencyName;
+    };
 
-  const salary = vacancy.salary
+    const salary = vacancy.salary
     ? `${vacancy.salary.from ? `${formatNumber(vacancy.salary.from)}` : ""} ${
         vacancy.salary.to ? `– ${formatNumber(vacancy.salary.to)}` : ""
-      } ${formatCurrency(vacancy.salary.currency) || ""}`
+        } ${formatCurrency(vacancy.salary.currency) || ""}`
     : "Не указана";
 
-  const formatExperience = (experienceName?: string) => {
-    if (!experienceName) return "Не указано";
+    const formatExperience = (experienceName?: string) => {
+      if (!experienceName) return "Не указано";
 
     const normalized = experienceName.toLowerCase().trim();
 
@@ -47,29 +47,33 @@ export const JobCard = ({ vacancy }: Props) => {
       }
     }
 
-    return experienceName;
-  };
+      return experienceName;
+    };
 
-  const getWorkFormatData = (formatId: string) => {
-    switch (formatId) {
+    const getWorkFormatData = (formatId: string) => {
+      switch (formatId) {
+
       case "REMOTE":
         return {
           label: "Можно удалённо",
           bg: "var(--mantine-color-primary-4)",
           color: "var(--mantine-color-white-0)",
         };
+
       case "ON_SITE":
         return {
           label: "Офис",
           bg: "var(--mantine-color-ultraLight-9)",
           color: "var(--mantine-color-gray-9)",
         };
+
       case "HYBRID":
         return {
           label: "Гибрид",
           bg: "var(--mantine-color-black-9)",
           color: "var(--mantine-color-white-0)",
         };
+
       default:
         return {
           label: "Не указано",
@@ -79,14 +83,14 @@ export const JobCard = ({ vacancy }: Props) => {
     }
   };
 
-  const workFormat = vacancy.work_format?.[0];
-  const { label, bg, color } = workFormat
-    ? getWorkFormatData(workFormat.id)
-    : {
-        label: "Не указано",
-        bg: "var(--mantine-color-gray-1)",
-        color: "var(--mantine-color-black-9)",
-      };
+    const workFormat = vacancy.work_format?.[0];
+    const { label, bg, color } = workFormat
+      ? getWorkFormatData(workFormat.id)
+      : {
+          label: "Не указано",
+          bg: "var(--mantine-color-gray-1)",
+          color: "var(--mantine-color-black-9)",
+        };
 
   return (
 

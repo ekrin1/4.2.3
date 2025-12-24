@@ -17,15 +17,18 @@ export const VacanciesPage = () => {
     (state) => state.vacancies
   );
 
-      useEffect(() => {
-        dispatch(fetchVacanciesThunk());
-      }, [page, dispatch]);
+    useEffect(() => {
+      dispatch(fetchVacanciesThunk());
+    }, [page, dispatch]);
 
   return (
+
         <Container className={styles.container} mt="md">
+          
             <Search />
 
               <Group className={styles.main}>
+
                 <FiltersSidebar />
 
                 <div className={styles.vacancies}>
@@ -42,9 +45,11 @@ export const VacanciesPage = () => {
                         onChange={(p) => dispatch(setPage(p))}
                       />
                   </>
-          )}
-          </div>
+                  )}
+                </div>
+
               </Group>
+
         </Container>
   )
 }

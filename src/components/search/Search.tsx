@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Group, Title, TextInput, Button } from "@mantine/core";
 import styles from './Search.module.css';
 ;
@@ -10,21 +10,25 @@ import { fetchVacanciesThunk, setPage, setSearch } from "../../store/vacanciesSl
 export const Search = () => { 
 
     const dispatch = useAppDispatch();
-    const { page, search } = useAppSelector(
+    const { search } = useAppSelector(
         (state) => state.vacancies
     );
 
     const [localSearch, setLocalSearch] = useState(search);
 
-    useEffect(() => {
-    dispatch(fetchVacanciesThunk());
-    }, [page, dispatch]);
-
     const handleSearch = () => {
-    dispatch(setSearch(localSearch));
-    dispatch(setPage(1));
-    dispatch(fetchVacanciesThunk());
+        dispatch(setSearch(localSearch));
+        dispatch(setPage(1));
+        dispatch(fetchVacanciesThunk());
     };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+        handleSearch();
+        }
+    };
+
 
     return (
 
@@ -47,6 +51,7 @@ export const Search = () => {
                         placeholder="Должность или название компании"
                         value={localSearch}
                         onChange={(e) => setLocalSearch(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         leftSection={<SearchIcon/>}
                         size="md"
                     />
