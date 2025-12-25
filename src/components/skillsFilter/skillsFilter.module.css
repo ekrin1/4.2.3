@@ -58,6 +58,11 @@
   transition: background-color 0.2s ease;
 }
 
+.pills_skill button {
+vertical-align: middle;
+padding: 0;
+}
+
 .pills_skill path {
   fill: var(--mantine-color-lightGray-9);
 }

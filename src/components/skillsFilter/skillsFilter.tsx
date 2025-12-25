@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Group, Card, Text, Pill, PillGroup, TextInput, ActionIcon } from "@mantine/core";
+import { Group, Card, Text, Pill, PillGroup, TextInput, ActionIcon, CloseButton } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 
 import styles from "./skillsFilter.module.css";
@@ -72,6 +72,13 @@ export const SkillsFilter = () => {
                         className={styles.pills_skill}
                         >
                             {skill}
+                        <CloseButton
+                            size={15}
+                            iconSize={12}
+                            onClick={() => removeSkill(skill)}
+                            aria-label="Удалить навык"
+                            ml={4}
+                        />
                         </Pill>
                     ))} 
                 </PillGroup>
